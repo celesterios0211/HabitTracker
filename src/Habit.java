@@ -1,27 +1,63 @@
-// Base class for all habits in the app.
-// This class uses abstraction because we don't know how each habit calculates progress yet.
 public abstract class Habit {
-    protected String name;       // Name of the habit (ex: Drink Water)
-    protected String category;   // Category (ex: Health, Study)
-    protected int streak;        // How many days in a row the habit was completed
+    private String name;
+    private String category;
+    private int streak;
+    private int completedCount;
+    private String lastCompletedDate;
 
-    // Constructor to set up basic habit information
     public Habit(String name, String category) {
         this.name = name;
         this.category = category;
         this.streak = 0;
+        this.completedCount = 0;
+        this.lastCompletedDate = "Not completed yet";
     }
 
-    // Each habit type will calculate progress differently (polymorphism)
-    public abstract void calculateProgress();
-
-    // Encapsulation: getters to access private/protected fields
-    public String getName() { return name; }
-    public String getCategory() { return category; }
-    public int getStreak() { return streak; }
-
-    // Method to increase streak when user completes the habit
-    public void incrementStreak() {
+    public void markComplete(String date) {
+        completedCount++;
         streak++;
+        lastCompletedDate = date;
+    }
+
+    public abstract String getFrequency();
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public int getStreak() {
+        return streak;
+    }
+
+    public int getCompletedCount() {
+        return completedCount;
+    }
+
+    public String getLastCompletedDate() {
+        return lastCompletedDate;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setStreak(int streak) {
+        this.streak = streak;
+    }
+
+    public void setCompletedCount(int completedCount) {
+        this.completedCount = completedCount;
+    }
+
+    public void setLastCompletedDate(String lastCompletedDate) {
+        this.lastCompletedDate = lastCompletedDate;
     }
 }
